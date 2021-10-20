@@ -1,0 +1,45 @@
+""" Final score page display """
+
+import SwiftUI
+
+struct ScoreView: View {
+    let viewModel: ScoreViewModel
+    var body: some View {
+        ZStack{
+            QuizColour.main.ignoresSafeArea()      ## Displaying final score title
+            VStack{
+                Spacer()
+                Text("Final Score:")
+                    .font(.title2)
+                Spacer()
+              
+                VStack{
+                    Text("\(viewModel.percentage)%")   ## Displaying score percentage
+                        .font(.title)
+                        .fontWeight(.bold)
+                }
+                Spacer()
+                    .frame(height:200.0)
+                
+                VStack{
+                    Text("\(viewModel.correctGuesses)🙌🏻")    ## Displays amount of correct answers
+                    Spacer()
+                        .frame(height:20.0)
+                    Text("\(viewModel.incorrectGuesses)🤷🏻‍♀️")  ## Displays amount of wrong answers
+                }
+                Spacer()
+                NavigationLink(destination:QuizView(), label:{   ## Button to start quiz over
+                    BottomTextView(str: "Try Again?")
+                })
+            }
+            .foregroundColor(.white)
+            .navigationBarHidden(true)
+        }
+    }
+}
+
+struct ScoreView_Previews: PreviewProvider {           ## Xcode previews
+    static var previews: some View {
+        ScoreView(viewModel: ScoreViewModel(correctGuesses: 0, incorrectGuesses: 0))
+    }
+}
