@@ -1,0 +1,49 @@
+""" Formatting for ea. question page """
+
+import SwiftUI
+
+struct QuestionView: View {
+  @EnvironmentObject var viewModel: QuizViewModel
+  let question: Question
+ 
+  var body: some View {
+    VStack{
+        Text(question.questionText)     ## Formatting for ea. quiz question
+            .font(.title)
+            .bold()
+            .multilineTextAlignment(.center)
+            .padding()
+        Spacer()
+        
+        VStack {
+            ForEach(0..<question.choices.count) { answerIndex in          ## Displaying answer choices and keeping count if answer is correct/incorrect
+                Button(action: {
+                    print("Selected: \(question.choices[answerIndex])")
+                    viewModel.makeGuess(atIndex: answerIndex)
+                  }, label: {
+                    ChoiceViewText(choiceText: question.choices[answerIndex])       ## Displaying colour based on answer selected
+                        .background(viewModel.colour(forOptionIndex: answerIndex))
+                  })
+                .disabled(viewModel.guessMade)
+                Spacer()
+                    .frame(height:10.0)
+            }
+        }
+        if viewModel.guessMade{
+            Button(action: {viewModel.displayNextScreen() }) {       ## Once a button is clicked, display button to head to next question
+                BottomTextView(str:"Next")
+                    }
+                }
+        Spacer()
+            .frame(height:10.0)
+        
+            }
+        }
+    }
+
+struct QuestionView_Previews: PreviewProvider { ## Preview question page on Xcode
+    static var previews: some View {
+        QuestionView(question: Quiz().currentQuestion)
+            .environmentObject(QuizViewModel())
+    }
+}
