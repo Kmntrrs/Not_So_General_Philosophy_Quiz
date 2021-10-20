@@ -1,0 +1,42 @@
+""" Designing title page of the app """
+
+import SwiftUI
+
+struct WelcomeView: View {
+    var body: some View {
+        NavigationView{
+            ZStack{
+                QuizColour.main.ignoresSafeArea()
+                VStack{
+                    Text("Welcome to the [Not so] General Philosophy Quiz!") ## Title & formatting 
+                        .font(.title2)
+                        .fontWeight(.regular)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                        Spacer()
+                    
+                    VStack{
+                        Text("Remember: There are no such things as losers. Just winners and learners!") ## Subheading & formatting
+                            .font(.subheadline)
+                            .fontWeight(.regular)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            Spacer()
+                                .frame(height:40.0)
+                        
+                        NavigationLink(destination: QuizView(), label: {BottomTextView(str:"Ready?")}) ## Button that navigates to quiz pages
+                    }
+                }
+            }
+            .foregroundColor(.white)
+        }
+    }
+}
+
+
+
+struct WelcomeView_Previews: PreviewProvider { ## Allows you to preview page in Xcode
+    static var previews: some View {
+        WelcomeView()
+    }
+}
