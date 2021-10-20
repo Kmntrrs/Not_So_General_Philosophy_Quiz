@@ -1,0 +1,34 @@
+""" Quiz display page for ea. question """
+
+import SwiftUI
+
+struct QuizView: View {
+    @StateObject var viewModel = QuizViewModel()
+    var body: some View {
+        ZStack{
+            QuizColour.main.ignoresSafeArea()
+            VStack{
+                Text(viewModel.questionProgressText)       ## Formatting and display of what question user is on 
+                    .font(.headline)
+                    .fontWeight(.regular)
+                    .multilineTextAlignment(.center)
+                    .padding()
+                QuestionView(question: viewModel.currentQuestion)    ## Formatting and display for current question
+            }
+        }
+        .foregroundColor(.white)
+        .environmentObject(viewModel)
+        .navigationBarHidden(true)
+        .background(NavigationLink(destination: ScoreView(viewModel: ScoreViewModel(correctGuesses: viewModel.correctGuesses, incorrectGuesses: viewModel.incorrectGuesses)),
+                                   isActive:
+                                    .constant(viewModel.quizOver), label: {EmptyView() } )       ##
+        )
+    }
+    
+}
+
+struct QuizView_Previews: PreviewProvider {.  ## Xcode previews
+    static var previews: some View {
+        QuizView()
+    }
+}
