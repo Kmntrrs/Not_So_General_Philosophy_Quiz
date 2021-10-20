@@ -1,0 +1,57 @@
+""" Model used in Quiz_view """
+
+import SwiftUI
+
+class QuizViewModel: ObservableObject {
+    @Published private var quiz = Quiz()
+    var currentQuestion: Question{
+        quiz.currentQuestion
+    }
+    var questionProgressText: String {                               ## Displays what question user is on 
+        "\(quiz.currentQuestionIndex + 1) / \(quiz.numOfQuestions)"
+    }
+    var guessMade: Bool {         ## If a choice button is selected this is True
+        if let _ = quiz.guesses[currentQuestion]{
+            return true
+        } else{
+            return false
+        }
+    }
+    
+    var quizOver: Bool {        ## If there are no more questions this will be True and the quiz will end
+        quiz.quizOver
+    }
+    
+    var correctGuesses: Int {          ## Store number of correct guesses
+        quiz.guessCount.correct
+    }
+    
+    var incorrectGuesses: Int {       ## Stores number of incorrect guesses
+        quiz.guessCount.incorrect
+    }
+    
+    
+    func makeGuess(atIndex index:Int){            ## Function that tracks choice button selected 
+        quiz.guessForCurrentQuestion(atIndex: index)
+    }
+    
+    func displayNextScreen(){.      ## Function that displays the next question page
+        quiz.updateGameStatus()
+    }
+    
+    func colour(forOptionIndex optionIndex: Int) -> Color {.    ## Function to display background colour of button depending if answer is correct/incorrect
+        if let guessIndex = quiz.guesses[currentQuestion] {
+            if guessIndex != optionIndex {
+                return QuizColour.main
+            }else if guessIndex == currentQuestion.correctAnswerIndex{
+                return QuizColour.correctGuess
+            }else{
+                return QuizColour.incorrectGuess
+            }
+        } else{
+            return QuizColour.main
+        }
+    }
+ 
+    
+}
