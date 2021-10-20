@@ -1,0 +1,41 @@
+""" Creation of question that are going to be shuffled & displayed on quiz pages """
+
+import Foundation
+
+struct Question: Hashable {
+    let questionText: String
+    let choices: [String]
+    let correctAnswerIndex: Int
+    
+    """ Creating questions w/ their respective choices & index of the correct answer w/n the list of choices """
+    
+    static var allQuestions = [
+        Question(questionText: "In 'Sickness Unto Death', Kierkegaard refers to 'sickness' as not living life as your authentic self. What is one of causes of this sickness?",
+                 choices: ["Escaping who you are", "Creating who you are", "Comparing yourself to others"],
+                 correctAnswerIndex: 0), 
+        
+        Question(questionText: "William Paley's argument for the existence of God likens the complexity of a watch to a human eye. Why?",
+                 choices: ["One was created by God, the other created by God's creation","Complex things must have a creator", "God created both"],
+                 correctAnswerIndex: 1),
+       
+        Question(questionText: "In 'Euthyphro', Plato's dilemma is whether God deems certain actions morally good or are certain actions good in themselves. Why is this a dilemma?",
+                 choices: ["Morals can't be above an omnipotent being","If God determines what's good, morality is arbitrary", "Both"],
+                 correctAnswerIndex: 1),
+        
+        Question(questionText: "J.L. Mackie's 'Problem of Evil' states that it cannot all be true that God is omnipotent, omnibenevolent and omniscient if evil exists. What is one of the reasons why he thinks so?",
+                 choices: ["Evil is necessary for his omnibenevolence","If evil exists, it is not separate from God", "If God is omnipotent he should be able to remove all evil"],
+                 correctAnswerIndex: 2),
+        
+        Question(questionText: "In Richard Taylor's 'Osmo', he argues fate is predetermined; the past is fixed and so is the future. What is his explanation for people thinking otherwise?",
+                 choices: ["People are not informed of future events so they believe it is open","People are fickle and their future choices can change", "God gave humans free will"],
+                 correctAnswerIndex: 0),
+        
+        Question(questionText: "Presentism is the belief that the past and future do not exist, only the present does. What is one of the presentist's arguments against time travel?",
+                 choices: ["God does not allow time travel","It's impossible for two of the same beings to exist at the same time", "Time travellers wouldn't be travelling to an actual place in time"],
+                 correctAnswerIndex: 2),
+        
+        Question(questionText: "If the dog wags its tail, it's happy. The tail is either wagging or still. It is not still, so...?",
+                 choices: ["The tail is wagging","The dog is happy", "The dog is sad"],
+                 correctAnswerIndex: 1)
+    ]
+}
