@@ -16,12 +16,12 @@ struct QuestionView: View {
         Spacer()
         
         VStack {
-            ForEach(0..<question.choices.count) { answerIndex in          ## Displaying answer choices and keeping count if answer is correct/incorrect
+            ForEach(0..<question.choices.count) { answerIndex in          ## Checks which choice button is selected as a guess
                 Button(action: {
                     print("Selected: \(question.choices[answerIndex])")
                     viewModel.makeGuess(atIndex: answerIndex)
                   }, label: {
-                    ChoiceViewText(choiceText: question.choices[answerIndex])       ## Displaying colour based on answer selected
+                    ChoiceViewText(choiceText: question.choices[answerIndex])       ## Background colour of button changes depending if answer is correct/incorrect
                         .background(viewModel.colour(forOptionIndex: answerIndex))
                   })
                 .disabled(viewModel.guessMade)
