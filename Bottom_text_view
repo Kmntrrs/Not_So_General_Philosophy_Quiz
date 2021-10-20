@@ -1,0 +1,23 @@
+""" Formatting for bottom buttons in welcome, score and, question views """
+
+import SwiftUI
+
+struct BottomTextView: View {
+    let str:String
+    var body: some View {
+        HStack{
+            Spacer()
+            Text(str)
+                .font(.headline)
+                .bold()
+                .padding()
+            Spacer()
+        }.background(QuizColour.accent)
+    }
+}
+
+struct BottomTextView_Previews: PreviewProvider {     ## Xcode previews
+    static var previews: some View {
+        BottomTextView(str: "")
+    }
+}
