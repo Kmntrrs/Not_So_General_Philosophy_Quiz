@@ -21,7 +21,7 @@ struct QuizView: View {
         .navigationBarHidden(true)
         .background(NavigationLink(destination: ScoreView(viewModel: ScoreViewModel(correctGuesses: viewModel.correctGuesses, incorrectGuesses: viewModel.incorrectGuesses)),
                                    isActive:
-                                    .constant(viewModel.quizOver), label: {EmptyView() } )       ##
+                                    .constant(viewModel.quizOver), label: {EmptyView() } )       ## Sending info on which button clicked to add them to final score
         )
     }
     
